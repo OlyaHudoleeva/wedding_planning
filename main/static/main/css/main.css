@@ -1,0 +1,46 @@
+html, body {
+    height: 100%;
+    font-size: 1rem;
+    font-family: 'Roboto Slab', serif;
+}
+
+.logo-image {
+    height: 55px;
+    width: 137px;
+}
+
+/*.gradient {*/
+/*background: rgb(255,191,244);*/
+/*background: linear-gradient(90deg, rgba(255,191,244,1) 0%, rgba(253,255,164,1) 100%);*/
+/*}*/
+
+.page-header {
+    margin-top: 4rem;
+    text-align: center;
+    font-size: 1.15rem;
+}
+
+.page-header h1 {
+    padding-bottom: 3%;
+    padding-top: 20%;
+}
+
+.page-header p {
+    padding-top: 1%;
+    color: white;
+    opacity: 0.5;
+    background-color: black;
+    padding-bottom: 1%;
+}
+header {
+    background: url(../img/thomas-william-nAvodiKjbTM-unsplash.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    overflow: hidden;
+    background-blend-mode: overlay;
+}
+
+.card-img {
+    width: 200px;
+}
