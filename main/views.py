@@ -10,3 +10,6 @@ def guests(request):
 
 def overview(request):
     return render(request, 'main/overview.html')
+
+def checklist(request):
+    return render(request, 'main/todo_list.html')

@@ -7,6 +7,9 @@
 /*      border-right: 1px solid grey;*/
 /*    }*/
 
+* {
+    font-family: 'Roboto Slab', serif;
+}
 body {
     min-height: 100vh;
     overflow-x: hidden;
@@ -27,7 +30,7 @@ body {
 }
 
 .separator {
-    margin: 1rem;
+    margin: 2rem;
     border-bottom: 1px dashed #aaa;
 }
 
@@ -39,14 +42,54 @@ body {
     color: #aaa;
 }
 
-.nav-link {
-    text-transform: capitalize;
-}
-
 .nav-link:hover {
     background-color: #f3f2f2;
 }
 
 .text-primary {
     color: #2d5e6e !important;
+}
+
+.bride-card-img img {
+    height: 60px;
+    width: 90px;
+}
+
+.bride-card-img, .groom-card-img {
+    justify-content: center;
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+
+.groom-card-img img{
+    height: 60px;
+    width: 110px;
+}
+
+.page-name {
+    color: #2d5e6e;
+}
+
+.accordion .card {
+    border-radius: 0;
+    background: none;
+    border-left-width: 0;
+    border-right-width: 0;
+}
+
+.accordion .card .card-header {
+    background: none;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 0;
+    border: none;
+    outline: inherit;
+}
+
+.accordion .card-header .btn {
+    color: #2d5e6e;
+    width: 100%;
+    text-align: left;
+    padding-left: 0;
 }

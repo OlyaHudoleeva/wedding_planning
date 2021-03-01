@@ -10,11 +10,6 @@ html, body {
     width: 137px;
 }
 
-/*.gradient {*/
-/*background: rgb(255,191,244);*/
-/*background: linear-gradient(90deg, rgba(255,191,244,1) 0%, rgba(253,255,164,1) 100%);*/
-/*}*/
-
 .page-header {
     margin-top: 4rem;
     text-align: center;

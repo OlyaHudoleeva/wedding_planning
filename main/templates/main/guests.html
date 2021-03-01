@@ -1,7 +1,61 @@
-{% extends 'main/layout.html' %}
+{% extends 'main/services.html' %}
+{% load static %}
 
 {% block title %}Online Wedding Planner | Гости{% endblock %}
 
 {% block content %}
-<h1>Online Wedding Planner | Гости</h1>
+    <div class="page-content p-5" id="content">
+        <h2 class="display-4 text-black page-name">Список приглашённых гостей</h2>
+        <p class="lead text-black mb-0">Подготовьте список гостей со стороны невесты и жениха. Отмечайте тех, кто точно
+            придет на свадьбу. Узнайте соотношение гостей с каждой из сторон, количество детей. Также Вы можете
+            экспортировать
+            список гостей в CSV или XLS файл.</p>
+        <div class="separator"></div>
+        <div class="row text-black">
+            <div class="col-lg-6 bride-side-guests">
+                <div class="bride-card-img">
+                    <img src="{% static 'main/img/bride-shoe.png' %}" alt="Bride's shoe">
+                </div>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Статус
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Ожидаем ответ</a>
+                        <a class="dropdown-item" href="#">Приглашение принято</a>
+                        <a class="dropdown-item" href="#">Приглашение отклонено</a>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        Right-aligned menu
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button">Action</button>
+                        <button class="dropdown-item" type="button">Another action</button>
+                        <button class="dropdown-item" type="button">Something else here</button>
+                    </div>
+                </div>
+
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut
+                    labore et dolore magna aliqua.</p>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut
+                    labore et dolore magna aliqua.</p>
+            </div>
+            <div class="col-lg-6 groom-side-guests">
+                <div class="groom-card-img">
+                    <img src="{% static 'main/img/groom-shoe.jpeg' %}" alt="Groom's shoe">
+                </div>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut
+                    labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

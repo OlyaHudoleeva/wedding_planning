@@ -1,0 +1,179 @@
+{% extends 'main/services.html' %}
+{% load static %}
+
+{% block title %}Online Wedding Planner | Список гостей{% endblock %}
+
+{% block content %}
+
+    <div class="page-content p-5" id="content">
+        <h2 class="display-4 text-black page-name">Список свадебных дел</h2>
+        <p class="lead text-black mb-0">Это Ваш личный список дел. Следите за всеми задачами, необходимыми для
+            организации
+            идеального свадебного дня. Следите за ходом подготовки: добавляйте, завершайте или удаляйте любую задачу,
+            чтобы
+            всё успеть</p>
+        <div class="separator"></div>
+
+
+        {#                <div class="row">#}
+        {#                    <div class="col-lg-8 offset-lg-2">#}
+        {#                        <div class="accordion mt-5" id="accordion">#}
+        {#                            <div class="card">#}
+        {#                                <div class="card-header" id="headingOne">#}
+        {#                                    <h2 class="clearfix mb-0">#}
+        {#                                        <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"#}
+        {#                                           aria-expanded="true" aria-controls="collapseOne">Найдите место проведения#}
+        {#                                            свадьбы </a>#}
+        {#                                    </h2>#}
+        {#                                </div>#}
+        {##}
+        {#                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne"#}
+        {#                                     data-parent="#accordion">#}
+        {#                                    <div class="card-body">#}
+        {#                                        <div class="form-check">#}
+        {#                                            <input class="form-check-input" type="checkbox" value=""#}
+        {#                                                   id="flexCheckDefault">#}
+        {#                                            <label class="form-check-label" for="flexCheckDefault">#}
+        {#                                                Начните с разговора с вашей половинкой (невестой или женихом) о Ваших#}
+        {#                                                предпочтениях и как бы Вы хотели провести свадьбу. Чему, на Ваш взгляд,#}
+        {#                                                необходимо уделить особое внимание?#}
+        {#                                            </label>#}
+        {#                                        </div>#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {##}
+        {#                            </div>#}
+        {#                        </div>#}
+        {#                    </div>#}
+        {#                </div>#}
+
+
+        <section id="checklist">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-10 offset-lg-1">
+                        <div class="accordion mt-3" id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="clearfix mb-0">
+                                        <button id="collapsingBtnOne" class="btn btn-link" data-toggle="collapse"
+                                                data-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne"
+                                                onclick="toggleAccordion('collapseOne', 'collapsingBtnOne')">
+                                            Найдите место проведения свадьбы <i class="fa fa-angle-down"></i>
+                                        </button>
+                                    </h5>
+                                </div>
+
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                     data-parent="#accordion">
+                                    <div class="card-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Начните с разговора с вашей половинкой (невестой или женихом) о Ваших
+                                                предпочтениях и как бы Вы хотели провести свадьбу. Чему, на Ваш взгляд,
+                                                необходимо уделить особое внимание?
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Составьте список всех понравившихся мест для проведения торжества.
+                                                Сравните цены и наличие свободных дат. Обязательно съездите посмотреть
+                                                наиболее подходящие площадкм вживую!
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Забронируйте понравившееся место на необходимую дату, заключите договор
+                                                и внесите предоплату.
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h5 class="mb-0">
+                                        <button id="collapsingBtnTwo" class="btn btn-link collapsed"
+                                                data-toggle="collapse"
+                                                data-target="#collapseTwo"
+                                                aria-expanded="false" aria-controls="collapseTwo"
+                                                onclick="toggleAccordion('collapseTwo', 'collapsingBtnTwo')">
+                                            Составьте список гостей <i class="fa fa-angle-down"></i>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                     data-parent="#accordion">
+                                    <div class="card-body">
+                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                        richardson ad squid.
+                                        3
+                                        wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
+                                        nesciunt
+                                        laborum
+                                        eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+                                        single-origin coffee
+                                        nulla
+                                        assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
+                                        anderson cred
+                                        nesciunt
+                                        sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
+                                        craft beer
+                                        farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of
+                                        them accusamus
+                                        labore sustainable VHS.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h5 class="mb-0">
+                                        <button id="collapsingBtnThree" class="btn btn-link collapsed"
+                                                data-toggle="collapse"
+                                                data-target="#collapseThree"
+                                                aria-expanded="false" aria-controls="collapseThree"
+                                                onclick="toggleAccordion('collapseThree', 'collapsingBtnThree')">
+                                            Найдите подрядчиков <i class="fa fa-angle-down"></i>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                     data-parent="#accordion">
+                                    <div class="card-body">
+                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                        richardson ad squid.
+                                        3
+                                        wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
+                                        nesciunt
+                                        laborum
+                                        eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+                                        single-origin coffee
+                                        nulla
+                                        assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
+                                        anderson cred
+                                        nesciunt
+                                        sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
+                                        craft beer
+                                        farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of
+                                        them accusamus
+                                        labore sustainable VHS.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+{% endblock %}
