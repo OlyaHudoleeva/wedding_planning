@@ -1,0 +1,52 @@
+/*html,*/
+/*body {*/
+/*  height:100%;*/
+
+/*}*/
+/*    .sticky div {*/
+/*      border-right: 1px solid grey;*/
+/*    }*/
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.vertical-nav {
+    min-width: 13rem;
+    width: 13rem;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.page-content {
+    margin-left: 13rem;
+}
+
+.separator {
+    margin: 1rem;
+    border-bottom: 1px dashed #aaa;
+}
+
+.text-uppercase {
+    letter-spacing: 0.1em;
+}
+
+.text-gray {
+    color: #aaa;
+}
+
+.nav-link {
+    text-transform: capitalize;
+}
+
+.nav-link:hover {
+    background-color: #f3f2f2;
+}
+
+.text-primary {
+    color: #2d5e6e !important;
+}

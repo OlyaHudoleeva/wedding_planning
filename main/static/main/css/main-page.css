@@ -1,5 +1,6 @@
 html, body {
     height: 100%;
+    width: 100%;
     font-size: 1rem;
     font-family: 'Roboto Slab', serif;
 }
@@ -32,6 +33,7 @@ html, body {
     background-color: black;
     padding-bottom: 1%;
 }
+
 header {
     background: url(../img/thomas-william-nAvodiKjbTM-unsplash.jpg) no-repeat;
     background-position: center;

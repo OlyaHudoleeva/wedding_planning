@@ -7,3 +7,6 @@ def index(request):
 
 def guests(request):
     return render(request, 'main/guests.html')
+
+def overview(request):
+    return render(request, 'main/overview.html')
