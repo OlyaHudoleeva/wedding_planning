@@ -1,0 +1,234 @@
+{% extends 'main/services.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block page-name %}Список свадебных дел{% endblock %}
+{% block page-description %}Это Ваш личный список дел. Следите за всеми задачами, необходимыми для
+    организации
+    идеального свадебного дня. Следите за ходом подготовки: добавляйте, завершайте или удаляйте любую задачу,
+    чтобы всё успеть{% endblock %}
+
+{% block content %}
+
+    <section id="checklist">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    {#                        <form action="add_tasks" method="post">#}
+                    <div class="accordion mt-3" id="accordion">
+
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button id="collapsingBtnOne" class="btn btn-link collapsed"
+                                            data-toggle="collapse"
+                                            data-target="#collapseOne" aria-expanded="false"
+                                            aria-controls="collapseOne"
+                                            onclick="toggleAccordion('collapseOne', 'collapsingBtnOne')">
+                                        Найдите место проведения свадьбы <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                 data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Начните с разговора с вашей половинкой (невестой или женихом) о
+                                            Ваших
+                                            предпочтениях и как бы Вы хотели провести свадьбу. Чему, на Ваш
+                                            взгляд,
+                                            необходимо уделить особое внимание?
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Составьте список всех понравившихся мест для проведения торжества.
+                                            Сравните цены и наличие свободных дат. Обязательно съездите
+                                            посмотреть
+                                            наиболее подходящие площадки вживую!
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Забронируйте понравившееся место на необходимую дату, заключите
+                                            договор
+                                            и внесите предоплату.
+                                        </label>
+                                    </div>
+                                    <div class="add-todo-item-btn">
+                                        <div class="input-group mt-3 md-3">
+                                            <input type="text" class="form-control task-description"
+                                                   id="task-description"
+                                                   placeholder="Опишите новую задачу..."
+                                                   aria-label="Опишите новую задачу..."
+                                                   aria-describedby="button-addon2">
+                                            <div class="input-group-append">
+                                                <button type="button"
+                                                        class="btn btn-outline-secondary add-todo-item-btn">
+                                                    <i class="fas fa-plus-circle"></i> Добавить задачу
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button id="collapsingBtnTwo" class="btn btn-link collapsed"
+                                            data-toggle="collapse"
+                                            data-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo"
+                                            onclick="toggleAccordion('collapseTwo', 'collapsingBtnTwo')">
+                                        Составьте список гостей <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                 data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Решите, сколько людей вы хотите видеть на своей свадьбе. Составьте
+                                            список гостей. Определитесь, сколько подружек невесты и друзей
+                                            жениха.
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Решите, как вы хотите вручить приглашения. Разработайте дизайн
+                                            пригласительных.
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Раздайте приглашения и предложите вашим гостям разделить с вами один
+                                            из
+                                            самых радостных и счастливых моментов вашей жизни!
+                                        </label>
+                                    </div>
+                                    <div class="input-group mt-3 md-3">
+                                        <input type="text" class="form-control task-description"
+                                               id="task-description"
+                                               placeholder="Опишите новую задачу..."
+                                               aria-label="Опишите новую задачу..."
+                                               aria-describedby="button-addon2">
+                                        <div class="input-group-append">
+                                            <button type="button"
+                                                    class="btn btn-outline-secondary add-todo-item-btn">
+                                                <i class="fas fa-plus-circle"></i> Добавить задачу
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                    <button id="collapsingBtnThree" class="btn btn-link collapsed"
+                                            data-toggle="collapse"
+                                            data-target="#collapseThree"
+                                            aria-expanded="false" aria-controls="collapseThree"
+                                            onclick="toggleAccordion('collapseThree', 'collapsingBtnThree')">
+                                        Найдите подрядчиков <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                 data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Найдите кейтеринг и выберите праздничное меню.
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Выберите ведущего, который будет создавать особую праздничную
+                                            атмосферу
+                                            на протяжении всего свадебного дня.
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Выберите фотографа и видеографа, которые запечатлят лучшие моменты
+                                            торжества на долгую память.
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Найдите флориста, обсудите свадебное оформление зала и заны выездной
+                                            регистрации. Следует заранее поискать в интернете привлекательные
+                                            варианты.
+                                        </label>
+                                    </div>
+                                    <div class="input-group mt-3 md-3">
+                                        <input type="text" class="form-control task-description"
+                                               id="task-description"
+                                               placeholder="Опишите новую задачу..."
+                                               aria-label="Опишите новую задачу..."
+                                               aria-describedby="button-addon2">
+                                        <div class="input-group-append">
+                                            <button type="button"
+                                                    class="btn btn-outline-secondary add-todo-item-btn">
+                                                <i class="fas fa-plus-circle"></i> Добавить задачу
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="input-group mt-5">
+                        <input name="task-group-name" type="text" class="form-control task-list-name"
+                               id="task-list-name"
+                               placeholder="Придумайте название новой группы задач..."
+                               aria-label="Придумайте название новой группы задач..."
+                               aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-secondary" id="add-task-list-btn"><i
+                                    class="fas fa-plus-circle"></i> Добавить новый список задач
+                            </button>
+                        </div>
+                    </div>
+                    {#                        </form>#}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+{% endblock %}
