@@ -104,6 +104,11 @@ body {
     font-size: 1.1rem;
 }
 
-.btn-link:focus {
-    text-decoration: none;
+.btn-link:focus, .card-header:focus {
+    text-decoration: none !important;
+    /*outline: none !important;*/
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
 }

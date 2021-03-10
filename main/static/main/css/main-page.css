@@ -30,14 +30,18 @@ html, body {
 }
 
 header {
-    background: url(../img/thomas-william-nAvodiKjbTM-unsplash.jpg) no-repeat;
+    background: url(../img/main-page.jpg) no-repeat;
     background-position: center;
     background-size: cover;
-    min-height: 100vh;
+    min-height: 91vh;
     overflow: hidden;
     background-blend-mode: overlay;
 }
 
 .card-img {
     width: 200px;
+}
+
+.row {
+    margin: 0 !important;
 }

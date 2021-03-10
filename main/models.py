@@ -20,9 +20,13 @@ class TaskGroup(models.Model):
     name = models.CharField(max_length=100)
     status = models.CharField(max_length=1, choices=STATUS, default='P')
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = 'Список задач'
         verbose_name_plural = 'Списки задач'
+
 
 class Task(models.Model):
     STATUS = (
@@ -33,6 +37,9 @@ class Task(models.Model):
     description = models.CharField(max_length=1000)
     status = models.CharField(max_length=1, choices=STATUS, default='P')
     due_date = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return self.description
 
     class Meta:
         verbose_name = 'Задача'

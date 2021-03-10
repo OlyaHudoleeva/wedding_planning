@@ -13,6 +13,8 @@ function toggleAccordion(textId, buttonId) {
     }
 }
 
+
+
 // document.getElementById("add-task-list-btn").addEventListener("click", function () {
 //     let task_group_name = document.getElementById("task-list-name").value;
 //
