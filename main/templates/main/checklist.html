@@ -84,18 +84,18 @@
                             </div>
                         {% endfor %}
                     </div>
-                    <div class="input-group mt-5">
-                        <input name="task-group-name" type="text" class="form-control task-list-name"
-                               id="add-new-task-group"
-                               placeholder=" Придумайте название новой группы задач..."
-                               aria-label="Придумайте название новой группы задач..."
-                               aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-outline-secondary" id="add-new-task-group-btn"><i
-                                    class="fas fa-plus-circle"></i> Добавить новый список задач
-                            </button>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="input-group mt-5">
+                            {{ taskGroupForm.name }}
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-outline-secondary" id="add-new-task-group-btn"><i
+                                        class="fas fa-plus-circle"></i> Добавить новый список задач
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                        <span>{{ error }}</span>
+                    </form>
                     {#                        </form>#}
                 </div>
             </div>
