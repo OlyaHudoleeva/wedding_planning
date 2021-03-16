@@ -5,3 +5,4 @@ from .models import *
 
 admin.site.register(Task)
 admin.site.register(TaskGroup)
+admin.site.register(Guest)

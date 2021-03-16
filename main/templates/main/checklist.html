@@ -37,22 +37,43 @@
                                      data-parent="#accordion">
                                     <div class="card-body">
                                         {% for task in group.tasks %}
+
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    {{ task.description }}
-                                                </label>
+                                                {% if task.status == "P" %}
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                           id="flexCheckDefault-{{ task.id }}">
+                                                    <label class="form-check-label strikethrough"
+                                                           for="flexCheckDefault">
+                                                        {{ task.description }}
+                                                    </label>
+                                                {% elif task.status == "C" %}
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                           id="flexCheckDefault-{{ task.id }}" checked>
+                                                    <label class="form-check-label strikethrough"
+                                                           for="flexCheckDefault">
+                                                        {{ task.description }}
+                                                    </label>
+                                                {% endif %}
+                                                <div class="btn-group d-flex align-items-center manage-tasks-btn-group">
+                                                    <button class="btn btn-outline-secondary" type="button"
+                                                            id="edit-task-btn"><i class="far fa-edit"></i></button>
+
+                                                    <button class="btn btn-outline-secondary" type="button"
+                                                            id="delete-task-btn"><i
+                                                            class="far fa-trash-alt"></i></button>
+                                                </div>
+
                                             </div>
                                         {% endfor %}
                                         <div class="input-group mt-3 md-3">
                                             <input type="text" class="form-control task-description"
-                                                   id="task-description"
+                                                   id="task-description-{{ group.id }}"
                                                    placeholder="Опишите новую задачу..."
                                                    aria-label="Опишите новую задачу..."
                                                    aria-describedby="button-addon2">
                                             <div class="input-group-append">
                                                 <button type="button"
+                                                        id="add-task-{{ group.id }}"
                                                         class="btn btn-outline-secondary add-todo-item-btn">
                                                     <i class="fas fa-plus-circle"></i> Добавить задачу
                                                 </button>
@@ -65,12 +86,12 @@
                     </div>
                     <div class="input-group mt-5">
                         <input name="task-group-name" type="text" class="form-control task-list-name"
-                               id="task-list-name"
-                               placeholder="Придумайте название новой группы задач..."
+                               id="add-new-task-group"
+                               placeholder=" Придумайте название новой группы задач..."
                                aria-label="Придумайте название новой группы задач..."
                                aria-describedby="button-addon2">
                         <div class="input-group-append">
-                            <button type="submit" class="btn btn-outline-secondary" id="add-task-list-btn"><i
+                            <button type="submit" class="btn btn-outline-secondary" id="add-new-task-group-btn"><i
                                     class="fas fa-plus-circle"></i> Добавить новый список задач
                             </button>
                         </div>

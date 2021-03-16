@@ -50,6 +50,10 @@ body {
     color: #2d5e6e !important;
 }
 
+/*.bride-side-guest {*/
+/*    text-align: center;*/
+/*}*/
+
 .bride-card-img img {
     height: 60px;
     width: 90px;
@@ -106,9 +110,46 @@ body {
 
 .btn-link:focus, .card-header:focus {
     text-decoration: none !important;
-    /*outline: none !important;*/
     outline-width: 0 !important;
     box-shadow: none;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
+}
+
+input[type=checkbox]:checked + label.strikethrough{
+  text-decoration: line-through;
+}
+
+.guests-column-header {
+    align-items: center;
+}
+
+.form-check {
+    display: flex;
+}
+
+.form-check-label {
+    width: 100%;
+}
+
+.manage-tasks-btn-group {
+    height: 40%;
+}
+
+#delete-task-btn {
+    border: none;
+    border-radius: 5%;
+    background: none;
+    color: red;
+    outline: none;
+    /*box-shadow: none;*/
+}
+
+#edit-task-btn {
+    border: none;
+    border-radius: 5%;
+    background: none;
+    color: cornflowerblue;
+    outline: none;
+    /*box-shadow: none;*/
 }

@@ -10,7 +10,11 @@ def index(request):
 
 
 def guests(request):
-    return render(request, 'main/guests.html')
+    bride_side_guests = Guest.objects.filter(side="B")
+    groom_side_guests = Guest.objects.filter(side="G")
+
+    return render(request, 'main/guests.html',
+                  {'bride_side_guests': bride_side_guests, 'groom_side_guests': groom_side_guests})
 
 
 def overview(request):
@@ -26,8 +30,7 @@ def checklist(request):
 
     # def assign_tasks_to_groups():
     for group in taskGroupList:
-        group.tasks = list(filter(lambda task: task.task_group_id == group, tasks))
-
+        group.tasks = list(filter(lambda task: task.task_group == group, tasks))
 
     return render(request, 'main/checklist.html', {'taskGroupList': taskGroupList})
 

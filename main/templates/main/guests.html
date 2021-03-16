@@ -16,44 +16,83 @@
                 <img src="{% static 'main/img/bride-shoe.png' %}" alt="Bride's shoe">
             </div>
 
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Статус
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Ожидаем ответ</a>
-                    <a class="dropdown-item" href="#">Приглашение принято</a>
-                    <a class="dropdown-item" href="#">Приглашение отклонено</a>
-                </div>
+            <div class="col-md-12 mb-5 text-center">
+                <h5 class="guests-column-header">Гости со стороны невесты</h5>
             </div>
 
-            <div class="btn-group">
-                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                    Right-aligned menu
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item" type="button">Action</button>
-                    <button class="dropdown-item" type="button">Another action</button>
-                    <button class="dropdown-item" type="button">Something else here</button>
-                </div>
-            </div>
+            {% for bride_side_guest in bride_side_guests %}
+                {#            dropdown group#}
+                <div class="input-group mt-3 mx-auto w-75">
 
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut
-                labore et dolore magna aliqua.</p>
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut
-                labore et dolore magna aliqua.</p>
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false"><i class="far fa-address-card"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item active" aria-current="true">Отдать приглашение</a></li>
+                        <li><a class="dropdown-item">Ожидаем ответ</a></li>
+                        <li><a class="dropdown-item">Приглашение принято</a></li>
+                        <li><a class="dropdown-item">Приглашение отклонено</a></li>
+                    </ul>
+
+                    <input type="text" aria-label="First name" class="form-control" placeholder="Имя"
+                           value="{{ bride_side_guest.first_name }}">
+                    <input type="text" aria-label="Last name" class="form-control" placeholder="Фамилия"
+                           value="{{ bride_side_guest.last_name }}">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false"><i class="fas fa-male"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item"><i class="fas fa-male"></i></a></li>
+                        <li><a class="dropdown-item"><i class="fas fa-female"></i></a></li>
+                        <li><a class="dropdown-item"><i class="fas fa-baby"></i></a></li>
+                    </ul>
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
+                            class="far fa-trash-alt"></i></button>
+                </div>
+
+                {#            end dropdown group#}
+            {% endfor %}
         </div>
         <div class="col-lg-6 groom-side-guests">
             <div class="groom-card-img">
                 <img src="{% static 'main/img/groom-shoe.jpeg' %}" alt="Groom's shoe">
             </div>
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut
-                labore et dolore magna aliqua.</p>
+
+            <div class="col-md-12 mb-5 text-center">
+                <h5 class="guests-column-header">Гости со стороны жениха</h5>
+            </div>
+
+            {% for groom_side_guest in groom_side_guests %}
+                {#            dropdown group#}
+                <div class="input-group mt-3 mx-auto w-75">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false"><i class="far fa-address-card"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item active" aria-current="true">Отдать приглашение</a></li>
+                        <li><a class="dropdown-item">Ожидаем ответ</a></li>
+                        <li><a class="dropdown-item">Приглашение принято</a></li>
+                        <li><a class="dropdown-item">Приглашение отклонено</a></li>
+                    </ul>
+                    <input type="text" aria-label="First name" class="form-control" placeholder="Имя"
+                           value="{{ groom_side_guest.first_name }}">
+                    <input type="text" aria-label="Last name" class="form-control" placeholder="Фамилия"
+                           value="{{ groom_side_guest.last_name }}">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false"><i class="fas fa-male"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item"><i class="fas fa-male"></i></a></li>
+                        <li><a class="dropdown-item"><i class="fas fa-female"></i></a></li>
+                        <li><a class="dropdown-item"><i class="fas fa-baby"></i></a></li>
+                    </ul>
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
+                            class="far fa-trash-alt"></i></button>
+                </div>
+
+                {#            end dropdown group#}
+            {% endfor %}
         </div>
+
     </div>
 {% endblock %}
