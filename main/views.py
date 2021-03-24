@@ -55,13 +55,23 @@ def logout_user(request):
 def index(request):
     return render(request, 'main/index.html')
 
+
 @login_required(login_url='login')
 def guests(request):
     bride_side_guests = Guest.objects.filter(side="B")
     groom_side_guests = Guest.objects.filter(side="G")
 
+    bride_side_amount = Guest.objects.filter(side="B").count()
+    groom_side_amount = Guest.objects.filter(side="G").count()
+
+    total_male = Guest.objects.filter(sex="M").count()
+    total_female = Guest.objects.filter(sex="F").count()
+    total_child = Guest.objects.filter(sex="C").count()
+
     return render(request, 'main/guests.html',
-                  {'bride_side_guests': bride_side_guests, 'groom_side_guests': groom_side_guests})
+                  {'bride_side_guests': bride_side_guests, 'groom_side_guests': groom_side_guests,
+                   'bride_side_amount': bride_side_amount, 'groom_side_amount': groom_side_amount,
+                   'total_male': total_male, 'total_female': total_female, 'total_child': total_child})
 
 
 @login_required(login_url='login')
