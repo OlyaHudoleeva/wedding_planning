@@ -1,0 +1,94 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block styles %}{% static 'main/css/login-register-page.css' %}{% endblock %}
+
+{% block title %}Online Wedding Planner | Registration{% endblock %}
+
+{% block content %}
+
+    <section class="login-form my-4 mx-5">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-lg-5">
+                    <img src="{% static 'main/img/photos-by-lanty-8GtqUWGMRRw-unsplash.jpg' %}" class="img-fluid"
+                         alt="">
+                </div>
+                <div class="col-lg-7 px-5 pt-5">
+                    <h1 class="font-weight-bold py-3">Online Wedding Planner</h1>
+                    <h5>Регистрация нового пользователя: </h5>
+                    <form action="registration" method="post">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                {{ register_form.username }}
+                                {#                                <input type="text" placeholder="Имя пользователя" class="form-control my-2 p-4">#}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                {{ register_form.email }}
+                                {#                                <input type="email" placeholder="Адрес электронной почты" class="form-control my-2 p-4">#}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                {{ register_form.password1 }}
+                                {#                                <input type="password" placeholder="Пароль" class="form-control my-2 p-4">#}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                {{ register_form.password2 }}
+                                {#                                <input type="password" placeholder="Повторите пароль" class="form-control my-2 p-4">#}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                <button type="submit" class="login-btn mt-3 mb-5">Зарегистрироваться</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    {{ register_form.errors }}
+
+                    <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    {#    <script>#}
+    {##}
+    {#        var form_fields = document.getElementsByTagName('input')#}
+    {#        form_fields[1].placeholder = 'Имя пользователя';#}
+    {#        form_fields[2].placeholder = 'Адрес электронной почты';#}
+    {#        form_fields[3].placeholder = 'Пароль';#}
+    {#        form_fields[4].placeholder = 'Повторите пароль';#}
+    {##}
+    {#        form_fields[1].type = 'text';#}
+    {#        form_fields[2].type = 'email';#}
+    {#        form_fields[3].type = 'password';#}
+    {#        form_fields[4].placeholder = 'password';#}
+    {##}
+    {##}
+    {#        for (var field in form_fields) {#}
+    {#            form_fields[field].className += ' form-control'#}
+    {#        }#}
+    {#    </script>#}
+
+{% endblock %}
+
+<form action="{% url 'registration' %}" method="POST">
+    {% csrf_token %}
+    {{ register_form.username }}
+    {{ register_form.email }}
+    {{ register_form.password1 }}
+    {{ register_form.password2 }}
+
+    {#    {% for field in register_form %}#}
+    {#        {{ field }}#}
+    {#    {% endfor %}#}
+
+
+    <input type="submit" name="create user">
+</form>

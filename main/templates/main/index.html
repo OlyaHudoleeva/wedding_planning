@@ -1,18 +1,21 @@
 {% extends 'main/layout.html' %}
 {% load static %}
 
+{% block styles %}{% static 'main/css/main-page.css' %}{% endblock %}
+
 {% block title %}Online Wedding Planner{% endblock %}
 
 {% block content %}
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'main/img/logo.png' %}" class="logo-image" alt="Logo"></a>
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'main/img/logo.png' %}"
+                                                                 class="logo-image" alt="Logo"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Главная </a>
@@ -25,6 +28,8 @@
                     </li>
                 </ul>
             </div>
+            <span class="navbar-text"> Добро пожаловать, {{ request.user }}</span>
+            <a href="{% url 'logout' %}"> Выйти</a>
         </div>
     </nav>
     <header class="page-header gradient">

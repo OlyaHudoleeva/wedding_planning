@@ -1,0 +1,47 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block styles %}{% static 'main/css/login-register-page.css' %}{% endblock %}
+
+{% block title %}Online Wedding Planner{% endblock %}
+
+{% block content %}
+
+    <section class="login-form my-4 mx-5">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-lg-5">
+                    <img src="{% static 'main/img/photos-by-lanty-8GtqUWGMRRw-unsplash.jpg' %}" class="img-fluid"
+                         alt="">
+                </div>
+                <div class="col-lg-7 px-5 pt-5">
+                    <h1 class="font-weight-bold py-3">Online Wedding Planner</h1>
+                    <h5>Войти в аккаунт: </h5>
+                    <form action="login" method="POST">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                <input type="text" name="username" placeholder="Имя пользователя" class="form-control my-3 p-4">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                <input type="password" name="password" placeholder="Пароль" class="form-control my-3 p-4">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                <button type="submit" class="login-btn mt-3 mb-5">Войти</button>
+                            </div>
+                        </div>
+                        {% for message in messages %}
+                            <p id="messages">{{ message }}</p>
+                        {% endfor %}
+                        <p>Нет аккаунта? <a href="{% url 'registration' %}">Зарегистрироваться</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

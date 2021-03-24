@@ -136,7 +136,7 @@ input[type=checkbox]:checked + label.strikethrough{
     height: 40%;
 }
 
-#delete-task-btn {
+.delete-task-btn {
     border: none;
     border-radius: 5%;
     background: none;
@@ -145,7 +145,7 @@ input[type=checkbox]:checked + label.strikethrough{
     /*box-shadow: none;*/
 }
 
-#edit-task-btn {
+.edit-task-btn {
     border: none;
     border-radius: 5%;
     background: none;

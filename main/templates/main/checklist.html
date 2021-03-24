@@ -19,7 +19,7 @@
                     {#                        <form action="add_tasks" method="post">#}
                     <div class="accordion mt-3" id="accordion">
 
-                        {% for group in taskGroupList %}
+                        {% for group in task_group_list %}
                             <div class="card">
                                 <div class="card-header" id="heading-{{ group.id }}">
                                     <h5 class="mb-0">
@@ -41,44 +41,51 @@
                                             <div class="form-check">
                                                 {% if task.status == "P" %}
                                                     <input class="form-check-input" type="checkbox" value=""
-                                                           id="flexCheckDefault-{{ task.id }}">
+                                                           id="flexCheckDefault-{{ task.id }}" data-id="{{ task.id }}">
                                                     <label class="form-check-label strikethrough"
                                                            for="flexCheckDefault">
                                                         {{ task.description }}
                                                     </label>
                                                 {% elif task.status == "C" %}
                                                     <input class="form-check-input" type="checkbox" value=""
-                                                           id="flexCheckDefault-{{ task.id }}" checked>
+                                                           id="flexCheckDefault-{{ task.id }}" data-id="{{ task.id }}" checked>
                                                     <label class="form-check-label strikethrough"
                                                            for="flexCheckDefault">
                                                         {{ task.description }}
                                                     </label>
                                                 {% endif %}
                                                 <div class="btn-group d-flex align-items-center manage-tasks-btn-group">
-                                                    <button class="btn btn-outline-secondary" type="button"
-                                                            id="edit-task-btn"><i class="far fa-edit"></i></button>
+                                                    <button class="btn btn-outline-secondary edit-task-btn"
+                                                            type="button"
+                                                            id="edit-task-btn-{{ task.id }}"><i class="far fa-edit"></i>
+                                                    </button>
 
-                                                    <button class="btn btn-outline-secondary" type="button"
-                                                            id="delete-task-btn"><i
+                                                    <button class="btn btn-outline-secondary delete-task-btn"
+                                                            type="button"
+                                                            id="delete-task-btn-{{ task.id }}"><i
                                                             class="far fa-trash-alt"></i></button>
                                                 </div>
 
                                             </div>
                                         {% endfor %}
-                                        <div class="input-group mt-3 md-3">
-                                            <input type="text" class="form-control task-description"
+                                        <form action="add_new_subtask" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ group.id }}" name="task_group_id">
+                                            <div class="input-group mt-3 md-3">
+                                                <input type="text" name="subtask-description" class="form-control task-description"
                                                    id="task-description-{{ group.id }}"
                                                    placeholder="Опишите новую задачу..."
                                                    aria-label="Опишите новую задачу..."
                                                    aria-describedby="button-addon2">
-                                            <div class="input-group-append">
-                                                <button type="button"
-                                                        id="add-task-{{ group.id }}"
-                                                        class="btn btn-outline-secondary add-todo-item-btn">
-                                                    <i class="fas fa-plus-circle"></i> Добавить задачу
-                                                </button>
+                                                <div class="input-group-append">
+                                                    <button name="add-task-btn" type="submit"
+                                                            id="add-task-{{ group.id }}"
+                                                            class="btn btn-outline-secondary add-todo-item-btn">
+                                                        <i class="fas fa-plus-circle"></i> Добавить задачу
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -87,9 +94,10 @@
                     <form method="POST">
                         {% csrf_token %}
                         <div class="input-group mt-5">
-                            {{ taskGroupForm.name }}
+                            {{ task_group_form.name }}
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-outline-secondary" id="add-new-task-group-btn"><i
+                                <button name="add-task-group-btn" type="submit" class="btn btn-outline-secondary"
+                                        id="add-new-task-group-btn"><i
                                         class="fas fa-plus-circle"></i> Добавить новый список задач
                                 </button>
                             </div>

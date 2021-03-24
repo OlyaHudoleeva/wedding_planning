@@ -1,16 +1,61 @@
-from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
 
 from .forms import *
 from .models import *
 
 
-# Create your views here.
+def register_page(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        register_form = CreateUserForm()
+        if request.method == 'POST':
+            register_form = CreateUserForm(request.POST)
+            if register_form.is_valid():
+                # user = register_form.save() #возможно выплюнет нового юзера, нужно проверить
+                register_form.save()
+                user = register_form.cleaned_data.get('username')
+                messages.success(request, 'Аккаунт успешно создан для пользователя ' + user)
+
+                return redirect('login')
+            # TaskGroup(user=register).save()
+
+    context = {'register_form': register_form}
+    return render(request, 'main/registration.html', context)
+
+
+def login_page(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.info(request, 'Данные введены некорректно')
+    context = {}
+    return render(request, 'main/login_page.html', context)
+
+
+def logout_user(request):
+    logout(request, )
+    return redirect('login')
+
 
 def index(request):
     return render(request, 'main/index.html')
 
-
+@login_required(login_url='login')
 def guests(request):
     bride_side_guests = Guest.objects.filter(side="B")
     groom_side_guests = Guest.objects.filter(side="G")
@@ -19,43 +64,59 @@ def guests(request):
                   {'bride_side_guests': bride_side_guests, 'groom_side_guests': groom_side_guests})
 
 
+@login_required(login_url='login')
 def overview(request):
     return render(request, 'main/overview.html')
 
-@login_required
+
+@login_required(login_url='login')
 def checklist(request):
     # data = {
     #     'title': 'Online Wedding Planner | Список дел'
     # }
     error = ''
     if request.method == "POST":
-        taskGroupForm = TaskGroupForm(request.POST)
-        taskGroupForm.instance.user = User.objects.get(id=1)
-        if taskGroupForm.is_valid():
-            taskGroupForm.save()
+        task_group_form = TaskGroupForm(request.POST)
+        task_group_form.instance.user = User.objects.get(id=1)
+        if task_group_form.is_valid():
+            task_group_form.save()
             return redirect('checklist')
         else:
             error = 'Данные введены некорректно'
 
-    taskGroupList = TaskGroup.objects.filter(user=request.user)
+    if request.user.is_authenticated:
+        task_group_list = TaskGroup.objects.filter(user=request.user)
+    else:
+        task_group_list = []
     tasks = Task.objects.all()
 
-    for group in taskGroupList:
+    for group in task_group_list:
         group.tasks = list(filter(lambda task: task.task_group == group, tasks))
+        task_form = TaskForm()
+        group.task_form = task_form
 
-    taskGroupForm = TaskGroupForm()
+    task_group_form = TaskGroupForm()
 
     return render(request, 'main/checklist.html',
-                  {'taskGroupList': taskGroupList, 'taskGroupForm': taskGroupForm, 'error': error})
-
-# def createTaskGroup(request):
-#     taskGroupForm = TaskGroupForm()
-#
-#     data = {'taskGroupForm' : taskGroupForm}
-#     response = checklist(request, data)
-#     return response
+                  {'task_group_list': task_group_list, 'task_group_form': task_group_form, 'error': error})
 
 
-# def add_tasks(request):
-#     print(request.POST['task-group-name'])
-#     return HttpResponseRedirect("checklist")
+@login_required(login_url='login')
+def add_new_subtask(request):
+    task_group_id = request.POST['task_group_id']
+    subtask_description = request.POST['subtask-description']
+
+    Task(task_group=TaskGroup.objects.filter(id=task_group_id)[0], description=subtask_description).save()
+    return redirect('checklist')
+
+
+@login_required(login_url='login')
+def handle_task(request):
+    status = request.POST['status']
+    id = request.POST['id']
+
+    task = Task.objects.filter(id=id)[0]
+    task.status = status
+    task.save()
+
+    return JsonResponse({})
