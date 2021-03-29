@@ -1,0 +1,161 @@
+{% extends 'main/services.html' %}
+{% load static %}
+
+{% block styles %}
+    {#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">#}
+    <link rel="stylesheet" href="{% static 'main/css/budget.css' %}">
+{% endblock %}
+
+{% block title %}Online Wedding Planner | Бюджет{% endblock %}
+{% block page-name %}Свадебный бюджет{% endblock %}
+{% block page-description %}Грамотное распределение средств – важнейшее условие успеха праздника. Калькулятор
+    свадебного бюджета позволит держать под контролем все расходы: расчёты с подрядчиками, расходы на программу
+    свадебного вечера и другое.{% endblock %}
+
+{% block content %}
+
+    {#    <section class="container">#}
+    {#    <div class="row">#}
+    {##}
+    {#        <div class="col 14">#}
+    {#            <div class="card-panel">#}
+    {#                <h6>Total</h6>#}
+    {#                <h2>$10000</h2>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    </section>#}
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="col-md">
+                <div class="card text-center text-white  mb-3" id="total-budget">
+                    <div class="card-header">
+                        <h5 class="card-title">Бюджет</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="col-md">
+                <div class="card text-center text-white  mb-3" id="budget-left">
+                    <div class="card-header">
+                        <h5 class="card-title">Остаток</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="col-md">
+                <div class="card text-center text-white  mb-3" id="paid-transactions">
+                    <div class="card-header">
+                        <h5 class="card-title">Оплачено 10 позиций</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#    <div class="row ">#}
+    {#        <a class="btn btn-light btn-sm" href="">Добавить расход</a>#}
+    {#    </div>#}
+
+    {#    <ul>#}
+    {#        <li>#}
+    {#            <div class="card card-body">#}
+    {#                <div class="col-md-3">#}
+    {#                    <span class="expanse-description">Описание</span>#}
+    {#                </div>#}
+    {##}
+    {#                <div class="col-md-3">#}
+    {#                    <span class="expanse-description">Цена</span>#}
+    {#                </div>#}
+    {##}
+    {#                <div class="col-md-2">#}
+    {#                    <span class="expanse-description">Предоплата</span>#}
+    {#                </div>#}
+    {##}
+    {#                <div class="col-md-2">#}
+    {#                    <span class="expanse-description">Сумма долга</span>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </li>#}
+    {#    </ul>#}
+
+
+
+    <div class="col-md-10 mx-auto w-75">
+        <div class="card card-body">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+                <a class="btn btn-light btn-sm" href=""><i class="fas fa-plus-circle"></i> Добавить расход</a>
+            </div>
+            <table class="table table-sm table-striped">
+                <thead class="text-center">
+                <tr>
+                    <th>Описание</th>
+                    <th>Цена</th>
+                    <th>Предоплата</th>
+                    <th>Сумма долга</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                    <td class="text-left">Услуги свадебного организатора</td>
+                    <td class="text-center">350</td>
+                    <td class="text-center">100</td>
+                    <td class="text-center">250</td>
+                    <td>
+                        <div class="btn-group d-flex align-items-center manage-tasks-btn-group">
+                            <a href="" class="btn btn-outline-secondary edit-task-btn"
+                               type="button"
+                               id="edit-task-btn-1"><i class="far fa-edit"></i>
+                            </a>
+
+                            <button class="btn btn-outline-secondary delete-task-btn"
+                                    type="button"
+                                    id="delete-task-btn-2"><i
+                                    class="far fa-trash-alt"></i></button>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Услуги ведушего</td>
+                    <td>600</td>
+                    <td>100</td>
+                    <td>500</td>
+                    <td>
+                        <div class="btn-group d-flex align-items-center manage-tasks-btn-group">
+                            <a href="" class="btn btn-outline-secondary edit-task-btn"
+                               type="button"
+                               id="edit-task-btn-1"><i class="far fa-edit"></i>
+                            </a>
+
+                            <button class="btn btn-outline-secondary delete-task-btn"
+                                    type="button"
+                                    id="delete-task-btn-2"><i
+                                    class="far fa-trash-alt"></i></button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>#}
+{% endblock %}

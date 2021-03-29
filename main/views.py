@@ -120,6 +120,22 @@ def add_new_subtask(request):
     return redirect('checklist')
 
 
+# class SubtaskUpdateView(UpdateView):
+#     model = Task
+#     template_name = 'main/checklist.html'
+#
+#     form_class = TaskForm
+
+
+# def update_subtask(request):
+#     task_group_id = request.POST.get['task_group_id']
+#     subtask_description = request.POST.get['subtask-description']
+#     task = Task.objects.get(task_group=TaskGroup.objects.filter(id=task_group_id)[0], description=subtask_description)
+#     form = TaskForm(instance=task)
+#
+#     context = {'form':form}
+#     return render(request, 'main/checklist.html', context)
+
 @login_required(login_url='login')
 def handle_task(request):
     status = request.POST['status']
@@ -130,3 +146,8 @@ def handle_task(request):
     task.save()
 
     return JsonResponse({})
+
+
+def budget(request):
+    context = {}
+    return render(request, 'main/budget.html', context)
