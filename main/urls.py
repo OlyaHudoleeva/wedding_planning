@@ -6,8 +6,8 @@ urlpatterns = [
     path('login', views.login_page, name='login'),
     path('logout', views.logout_user, name='logout'),
 
-    # path('projects', views.project_list, name='project_list'),
-    # path('<slug:project_slug>', views.project_detail, name='project_detail'),
+    path('projects', views.project_list, name='project_list'),
+    path('<slug:project_slug>', views.project_detail, name='project_detail'),
 
     path('', views.index, name='home'),
     path('guests', views.guests, name='guests'),

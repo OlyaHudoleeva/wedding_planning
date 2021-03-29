@@ -34,7 +34,7 @@
                         <h5 class="card-title">Бюджет</h5>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title"></h3>
+                        <h3 class="card-title">${{ project.budget }}</h3>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                         <h5 class="card-title">Остаток</h5>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title"></h3>
+                        <h3 class="card-title">$ ...</h3>
                     </div>
                 </div>
             </div>
@@ -57,10 +57,10 @@
             <div class="col-md">
                 <div class="card text-center text-white  mb-3" id="paid-transactions">
                     <div class="card-header">
-                        <h5 class="card-title">Оплачено 10 позиций</h5>
+                        <h5 class="card-title">Оплачено</h5>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title"></h3>
+                        <h3 class="card-title">$...</h3>
                     </div>
                 </div>
             </div>
@@ -112,45 +112,27 @@
                 </thead>
                 <tbody>
 
-                <tr>
-                    <td class="text-left">Услуги свадебного организатора</td>
-                    <td class="text-center">350</td>
-                    <td class="text-center">100</td>
-                    <td class="text-center">250</td>
-                    <td>
-                        <div class="btn-group d-flex align-items-center manage-tasks-btn-group">
-                            <a href="" class="btn btn-outline-secondary edit-task-btn"
-                               type="button"
-                               id="edit-task-btn-1"><i class="far fa-edit"></i>
-                            </a>
+                {% for expense  in expense_list %}
+                    <tr>
+                        <td class="text-left">{{ expense.description }}</td>
+                        <td class="text-center">{{ expense.cost }}</td>
+                        <td class="text-center">{{ expense.prepayment }}</td>
+                        <td class="text-center">payment_left</td>
+                        <td>
+                            <div class="btn-group d-flex align-items-center manage-tasks-btn-group">
+                                <a href="" class="btn btn-outline-secondary edit-task-btn"
+                                   type="button"
+                                   id="edit-task-btn-1"><i class="far fa-edit"></i>
+                                </a>
 
-                            <button class="btn btn-outline-secondary delete-task-btn"
-                                    type="button"
-                                    id="delete-task-btn-2"><i
-                                    class="far fa-trash-alt"></i></button>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Услуги ведушего</td>
-                    <td>600</td>
-                    <td>100</td>
-                    <td>500</td>
-                    <td>
-                        <div class="btn-group d-flex align-items-center manage-tasks-btn-group">
-                            <a href="" class="btn btn-outline-secondary edit-task-btn"
-                               type="button"
-                               id="edit-task-btn-1"><i class="far fa-edit"></i>
-                            </a>
-
-                            <button class="btn btn-outline-secondary delete-task-btn"
-                                    type="button"
-                                    id="delete-task-btn-2"><i
-                                    class="far fa-trash-alt"></i></button>
-                        </div>
-                    </td>
-                </tr>
+                                <button class="btn btn-outline-secondary delete-task-btn"
+                                        type="button"
+                                        id="delete-task-btn-2"><i
+                                        class="far fa-trash-alt"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>

@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.text import slugify
 
 
 # Create your models here.
@@ -79,3 +80,51 @@ class Guest(models.Model):
     class Meta:
         verbose_name = 'Гость'
         verbose_name_plural = 'Гости'
+
+
+class Project(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    bride_name = models.CharField(max_length=20)
+    groom_name = models.CharField(max_length=20)
+    wedding_date = models.DateField()
+    ceremony_place = models.CharField(max_length=200)
+    budget = models.IntegerField()
+    slug = models.SlugField(unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Project, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Проект'
+        verbose_name_plural = 'Проекты'
+
+
+class Category(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Категория расходов'
+        verbose_name_plural = 'Категории расходов'
+
+class Expense(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='expenses')
+    description = models.CharField(max_length=60)
+    cost = models.DecimalField(max_digits=10, decimal_places=2)
+    prepayment = models.DecimalField(max_digits=10, decimal_places=2)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return self.description
+
+    class Meta:
+        verbose_name = 'Расход'
+        verbose_name_plural = 'Расходы'

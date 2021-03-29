@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import *
 from .models import *
@@ -150,4 +150,16 @@ def handle_task(request):
 
 def budget(request):
     context = {}
+    return render(request, 'main/budget.html', context)
+
+
+def project_list(request):
+    context = {}
+    return render(request, 'main/project_list.html', context)
+
+
+def project_detail(request, project_slug):
+
+    project = get_object_or_404(Project, slug=project_slug)
+    context = {'project' : project, 'expense_list' : project.expenses.all()}
     return render(request, 'main/budget.html', context)
