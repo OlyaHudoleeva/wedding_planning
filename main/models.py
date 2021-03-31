@@ -12,12 +12,35 @@ from django.utils.text import slugify
 #     login = models.CharField(max_length=50)
 #     password = models.CharField(max_length=20)
 
+class Project(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    bride_name = models.CharField(max_length=20)
+    groom_name = models.CharField(max_length=20)
+    wedding_date = models.DateField()
+    ceremony_place = models.CharField(max_length=200)
+    budget = models.IntegerField()
+    slug = models.SlugField(unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Project, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Проект'
+        verbose_name_plural = 'Проекты'
+
+
 class TaskGroup(models.Model):
     STATUS = (
         ('P', 'В процессе'),
         ('C', 'Выполнена'),
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='task_group')
     name = models.CharField(max_length=100)
     status = models.CharField(max_length=1, choices=STATUS, default='P')
 
@@ -66,7 +89,7 @@ class Guest(models.Model):
         ('B', 'Сторона невесты')
     )
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='guests')
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     sex = models.CharField(max_length=1, choices=SEX, default='M')
@@ -80,28 +103,6 @@ class Guest(models.Model):
     class Meta:
         verbose_name = 'Гость'
         verbose_name_plural = 'Гости'
-
-
-class Project(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
-    bride_name = models.CharField(max_length=20)
-    groom_name = models.CharField(max_length=20)
-    wedding_date = models.DateField()
-    ceremony_place = models.CharField(max_length=200)
-    budget = models.IntegerField()
-    slug = models.SlugField(unique=True, blank=True)
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Project, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Проект'
-        verbose_name_plural = 'Проекты'
 
 
 class Category(models.Model):

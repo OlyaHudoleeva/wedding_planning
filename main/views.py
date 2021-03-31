@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import CreateView
 
 from .forms import *
 from .models import *
@@ -56,20 +57,28 @@ def index(request):
     return render(request, 'main/index.html')
 
 
+class ProjectCreateView(CreateView):
+    model = Project
+    template_name = 'main/create_project.html'
+    fields = ('name', 'bride_name', 'groom_name', 'wedding_date', 'ceremony_place', 'budget')
+
+
 @login_required(login_url='login')
-def guests(request):
-    bride_side_guests = Guest.objects.filter(side="B")
-    groom_side_guests = Guest.objects.filter(side="G")
+def guests(request, project_slug):
+    project = get_object_or_404(Project, slug=project_slug)
 
-    bride_side_amount = Guest.objects.filter(side="B").count()
-    groom_side_amount = Guest.objects.filter(side="G").count()
+    bride_side_guests = project.guests.filter(side="B")
+    groom_side_guests = project.guests.filter(side="G")
 
-    total_male = Guest.objects.filter(sex="M").count()
-    total_female = Guest.objects.filter(sex="F").count()
-    total_child = Guest.objects.filter(sex="C").count()
+    bride_side_amount = project.guests.filter(side="B").count()
+    groom_side_amount = project.guests.filter(side="G").count()
+
+    total_male = project.guests.filter(sex="M").count()
+    total_female = project.guests.filter(sex="F").count()
+    total_child = project.guests.filter(sex="C").count()
 
     return render(request, 'main/guests.html',
-                  {'bride_side_guests': bride_side_guests, 'groom_side_guests': groom_side_guests,
+                  {'project': project, 'bride_side_guests': bride_side_guests, 'groom_side_guests': groom_side_guests,
                    'bride_side_amount': bride_side_amount, 'groom_side_amount': groom_side_amount,
                    'total_male': total_male, 'total_female': total_female, 'total_child': total_child})
 
@@ -80,22 +89,26 @@ def overview(request):
 
 
 @login_required(login_url='login')
-def checklist(request):
+def checklist(request, project_slug):
     # data = {
     #     'title': 'Online Wedding Planner | Список дел'
     # }
+    project = get_object_or_404(Project, slug=project_slug, user=request.user)
     error = ''
     if request.method == "POST":
         task_group_form = TaskGroupForm(request.POST)
-        task_group_form.instance.user = User.objects.get(id=1)
+        # task_group_form.instance.user = User.objects.get(id=1)
+        task_group_form.instance.project = Project.objects.get(id=1)
+
         if task_group_form.is_valid():
             task_group_form.save()
-            return redirect('checklist')
+            return redirect('checklist', project_slug)
         else:
             error = 'Данные введены некорректно'
 
     if request.user.is_authenticated:
-        task_group_list = TaskGroup.objects.filter(user=request.user)
+        # task_group_list = TaskGroup.objects.filter(user=request.user)
+        task_group_list = project.task_group.all()
     else:
         task_group_list = []
     tasks = Task.objects.all()
@@ -108,16 +121,17 @@ def checklist(request):
     task_group_form = TaskGroupForm()
 
     return render(request, 'main/checklist.html',
-                  {'task_group_list': task_group_list, 'task_group_form': task_group_form, 'error': error})
+                  {'project': project, 'task_group_list': task_group_list, 'task_group_form': task_group_form,
+                   'error': error})
 
 
 @login_required(login_url='login')
-def add_new_subtask(request):
+def add_new_subtask(request, project_slug):
     task_group_id = request.POST['task_group_id']
     subtask_description = request.POST['subtask-description']
 
     Task(task_group=TaskGroup.objects.filter(id=task_group_id)[0], description=subtask_description).save()
-    return redirect('checklist')
+    return redirect('checklist', project_slug)
 
 
 # class SubtaskUpdateView(UpdateView):
@@ -137,7 +151,7 @@ def add_new_subtask(request):
 #     return render(request, 'main/checklist.html', context)
 
 @login_required(login_url='login')
-def handle_task(request):
+def handle_task(request, project_slug):
     status = request.POST['status']
     id = request.POST['id']
 
@@ -148,18 +162,12 @@ def handle_task(request):
     return JsonResponse({})
 
 
-def budget(request):
+def create_project(request):
     context = {}
-    return render(request, 'main/budget.html', context)
+    return render(request, 'main/create_project.html', context)
 
 
-def project_list(request):
-    context = {}
-    return render(request, 'main/project_list.html', context)
-
-
-def project_detail(request, project_slug):
-
-    project = get_object_or_404(Project, slug=project_slug)
-    context = {'project' : project, 'expense_list' : project.expenses.all()}
+def budget(request, project_slug):
+    project = get_object_or_404(Project, slug=project_slug, user=request.user)
+    context = {'project': project, 'expense_list': project.expenses.all()}
     return render(request, 'main/budget.html', context)

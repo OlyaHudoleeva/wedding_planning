@@ -1,4 +1,5 @@
 from django.urls import path
+
 from . import views
 
 urlpatterns = [
@@ -6,20 +7,19 @@ urlpatterns = [
     path('login', views.login_page, name='login'),
     path('logout', views.logout_user, name='logout'),
 
-    path('projects', views.project_list, name='project_list'),
-    path('<slug:project_slug>', views.project_detail, name='project_detail'),
+    path('create_project', views.ProjectCreateView.as_view(), name='create_project'),
 
     path('', views.index, name='home'),
-    path('guests', views.guests, name='guests'),
     path('overview', views.overview, name='overview'),
-    path('checklist', views.checklist, name='checklist'),
+    path('<slug:project_slug>/guests', views.guests, name='guests'),
+    path('<slug:project_slug>/checklist', views.checklist, name='checklist'),
+    path('<slug:project_slug>/budget', views.budget, name='budget'),
 
-    path('add_new_subtask', views.add_new_subtask, name='add_new_subtask'),
-    # path('update_subtask', views.update_subtask, name = 'update_subtask'),
+    path('<slug:project_slug>/add_new_subtask', views.add_new_subtask, name='add_new_subtask'),
+
     path('handle_task', views.handle_task),
 
-    path('budget', views.budget, name='budget'),
-
+    # path('update_subtask', views.update_subtask, name = 'update_subtask'),
     # path('create_task_group', views.createTaskGroup, name='create_task_group')
     # path('add_tasks', views.add_tasks)
 ]
