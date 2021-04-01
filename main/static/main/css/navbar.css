@@ -1,0 +1,10 @@
+html, body {
+    width: 100%;
+    font-size: 1rem;
+    font-family: 'Roboto Slab', serif;
+}
+
+.logo-image {
+    height: 55px;
+    width: 137px;
+}
