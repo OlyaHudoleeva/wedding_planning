@@ -2,15 +2,15 @@ from django.urls import path
 
 from . import views
 
+
 urlpatterns = [
     path('registration', views.register_page, name='registration'),
     path('login', views.login_page, name='login'),
     path('logout', views.logout_user, name='logout'),
 
     path('create_project', views.ProjectCreateView.as_view(), name='create_project'),
-
     path('', views.index, name='home'),
-    path('overview', views.overview, name='overview'),
+    path('<slug:project_slug>', views.overview, name='overview'),
     path('<slug:project_slug>/guests', views.guests, name='guests'),
     path('<slug:project_slug>/checklist', views.checklist, name='checklist'),
     path('<slug:project_slug>/budget', views.budget, name='budget'),

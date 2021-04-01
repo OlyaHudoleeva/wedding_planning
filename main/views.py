@@ -1,9 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView
+from django.utils.text import slugify
 
 from .forms import *
 from .models import *
@@ -62,6 +63,14 @@ class ProjectCreateView(CreateView):
     template_name = 'main/create_project.html'
     fields = ('name', 'bride_name', 'groom_name', 'wedding_date', 'ceremony_place', 'budget')
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        self.object = form.save(commit=False)
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return slugify(self.request.POST['name'])
 
 @login_required(login_url='login')
 def guests(request, project_slug):
@@ -84,8 +93,10 @@ def guests(request, project_slug):
 
 
 @login_required(login_url='login')
-def overview(request):
-    return render(request, 'main/overview.html')
+def overview(request, project_slug):
+    project = get_object_or_404(Project, slug=project_slug, user=request.user)
+    context = {'project': project}
+    return render(request, 'main/overview.html', context)
 
 
 @login_required(login_url='login')

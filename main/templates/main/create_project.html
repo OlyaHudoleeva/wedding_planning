@@ -1,18 +1,31 @@
-{% extends 'main/services.html' %}
 {% load static %}
 
-{% block styles %}
-{% endblock %}
-
-{% block title %}Online Wedding Planner | Создать проект{% endblock %}
-{% block page-name %}Свадебный проект{% endblock %}
-{% block page-description %}Создайте свадебный проект, чтобы начать планирование вашего идеального свадебного дня.{% endblock %}
-
-{% block content %}
-    <div class="container">
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form }}
-        </form>
-    </div>
-{% endblock %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Online Wedding Planner | Создать проект</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'main/css/create_project.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container text-center grey-text">
+    <h3>Создайте свадебный проект, чтобы начать планирование вашего идеального свадебного дня.</h3>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-outline-dark btn-lg">Начать</button>
+    </form>
+</div>
+</body>
+</html>
