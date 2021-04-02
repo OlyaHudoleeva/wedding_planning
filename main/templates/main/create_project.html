@@ -1,4 +1,4 @@
-{% extends 'main/layout.html' %}
+{% extends 'main/navbar.html' %}
 {% load static %}
 
 {% block styles %}{% static 'main/css/create_project.css' %}{% endblock %}
@@ -22,7 +22,7 @@
 {#</head>#}
 {#<body>#}
 {% block content %}
-    {% include 'main/layout.html' %}
+    {% include 'main/navbar.html' %}
     <section class="create_project" style="margin-top: 100px;">
         <h3 class="title text-center">Создайте проект, чтобы начать планирование вашего идеального свадебного дня</h3>
         <form action="" method="post">

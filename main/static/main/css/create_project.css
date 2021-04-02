@@ -54,5 +54,5 @@ label {
 .submit-btn {
     text-transform: uppercase;
     background-image: linear-gradient(125deg, #7abecc, #2d5e6e);
-    color: #fff;
+    color: #fff !important;
 }

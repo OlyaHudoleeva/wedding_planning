@@ -98,7 +98,36 @@
     <div class="col-md-10 mx-auto w-75">
         <div class="card card-body">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-                <a class="btn btn-light btn-sm" href=""><i class="fas fa-plus-circle"></i> Добавить расход</a>
+                <button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#expenseModal"><i class="fas fa-plus-circle"></i> Добавить расход
+                </button>
+                <div class="modal fade" id="expenseModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                     tabindex="-1" aria-labelledby="expenseModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="expenseModalLabel">Новый расход</h5>
+                            </div>
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <div class="modal-body text-center">
+                                    <label for="description">Описание</label>
+                                    <input name="description" placeholder="Описание" id="description">
+                                    <label for="cost">Цена</label>
+                                    <input name="cost" id="cost">
+                                    <label for="prepayment">Предоплата</label>
+                                    <input name="prepayment" id="prepayment">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
             <table class="table table-sm table-striped">
                 <thead class="text-center">
@@ -120,15 +149,18 @@
                         <td class="text-center">payment_left</td>
                         <td>
                             <div class="btn-group d-flex align-items-center manage-tasks-btn-group">
-                                <a href="" class="btn btn-outline-secondary edit-task-btn"
-                                   type="button"
-                                   id="edit-task-btn-1"><i class="far fa-edit"></i>
-                                </a>
-
-                                <button class="btn btn-outline-secondary delete-task-btn"
-                                        type="button"
-                                        id="delete-task-btn-2"><i
-                                        class="far fa-trash-alt"></i></button>
+                                {#                                <a href="" class="btn btn-outline-secondary edit-task-btn"#}
+                                {#                                   type="button"#}
+                                {#                                   id="edit-task-btn-1"><i class="far fa-edit"></i>#}
+                                {#                                </a>#}
+                                <form action="delete_expense" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value={{ expense.id }}>
+                                    <button class="btn btn-outline-secondary delete-task-btn"
+                                            type="submit"
+                                            id="delete-task-{{ expense.id }}-btn"><i
+                                            class="far fa-trash-alt"></i></button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -138,6 +170,8 @@
         </div>
     </div>
 
+    <script>
+    </script>
 
     {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>#}
 {% endblock %}

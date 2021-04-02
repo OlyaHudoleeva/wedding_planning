@@ -9,15 +9,21 @@ urlpatterns = [
     path('logout', views.logout_user, name='logout'),
 
     path('create_project', views.ProjectCreateView.as_view(), name='create_project'),
+
     path('', views.index, name='home'),
+
     path('<slug:project_slug>', views.overview, name='overview'),
+
     path('<slug:project_slug>/guests', views.guests, name='guests'),
+
     path('<slug:project_slug>/checklist', views.checklist, name='checklist'),
-    path('<slug:project_slug>/budget', views.budget, name='budget'),
-
     path('<slug:project_slug>/add_new_subtask', views.add_new_subtask, name='add_new_subtask'),
-
     path('handle_task', views.handle_task),
+
+    path('<slug:project_slug>/budget', views.budget, name='budget'),
+    path('<slug:project_slug>/delete_expense', views.delete_expense, name='delete_expense')
+
+
 
     # path('update_subtask', views.update_subtask, name = 'update_subtask'),
     # path('create_task_group', views.createTaskGroup, name='create_task_group')

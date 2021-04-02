@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm, TextInput, PasswordInput, EmailInput
-
+from django import forms
 from .models import *
 
 
@@ -50,3 +50,9 @@ class TaskForm(ModelForm):
     class Meta:
         model = Task
         fields = ['description']
+
+
+class ExpenseForm(forms.Form):
+    description = forms.CharField()
+    cost = forms.DecimalField(decimal_places=2)
+    prepayment = forms.DecimalField(decimal_places=2)

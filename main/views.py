@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView
-from django.utils.text import slugify
 
 from .forms import *
 from .models import *
@@ -71,6 +70,7 @@ class ProjectCreateView(CreateView):
 
     def get_success_url(self):
         return slugify(self.request.POST['name'])
+
 
 @login_required(login_url='login')
 def guests(request, project_slug):
@@ -180,5 +180,29 @@ def create_project(request):
 
 def budget(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug, user=request.user)
+
+    if request.method == 'POST':
+        form = ExpenseForm(request.POST)
+        if form.is_valid():
+            description = form.cleaned_data['description']
+            cost = form.cleaned_data['cost']
+            prepayment = form.cleaned_data['prepayment']
+
+            Expense.objects.create(
+                project=project,
+                description=description,
+                cost=cost,
+                prepayment=prepayment
+            ).save()
+            return HttpResponseRedirect('budget', project_slug)
+
     context = {'project': project, 'expense_list': project.expenses.all()}
     return render(request, 'main/budget.html', context)
+
+
+def delete_expense(request, project_slug):
+
+    id = request.POST['id']
+    Expense(id=id).delete()
+
+    return redirect('budget', project_slug)
