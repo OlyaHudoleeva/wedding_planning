@@ -181,6 +181,11 @@ def create_project(request):
 def budget(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug, user=request.user)
 
+    expense_list = project.expenses.all()
+
+    for expense in expense_list:
+        expense.payment_left = expense.cost - expense.prepayment
+
     if request.method == 'POST':
         form = ExpenseForm(request.POST)
         if form.is_valid():
@@ -196,12 +201,11 @@ def budget(request, project_slug):
             ).save()
             return HttpResponseRedirect('budget', project_slug)
 
-    context = {'project': project, 'expense_list': project.expenses.all()}
+    context = {'project': project, 'expense_list': expense_list}
     return render(request, 'main/budget.html', context)
 
 
 def delete_expense(request, project_slug):
-
     id = request.POST['id']
     Expense(id=id).delete()
 

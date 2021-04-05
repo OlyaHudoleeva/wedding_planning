@@ -33,6 +33,22 @@ class Project(models.Model):
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
 
+    def budget_left(self):
+        expense_list = Expense.objects.filter(project=self)
+        total_expense_cost = 0
+        for expense in expense_list:
+            total_expense_cost += expense.cost
+        return self.budget - total_expense_cost
+
+    def total_prepayment(self):
+        expense_list = Expense.objects.filter(project=self)
+        total_prepayment = 0
+        for expense in expense_list:
+            total_prepayment += expense.prepayment
+        return total_prepayment
+
+
+
 
 class TaskGroup(models.Model):
     STATUS = (
@@ -96,7 +112,6 @@ class Guest(models.Model):
     rsvp = models.CharField(max_length=2, choices=RSVP, default='IN')
     side = models.CharField(max_length=1, choices=SIDE, default='B')
 
-
     def __str__(self):
         return self.first_name + " " + self.last_name
 
@@ -116,6 +131,7 @@ class Category(models.Model):
         verbose_name = 'Категория расходов'
         verbose_name_plural = 'Категории расходов'
 
+
 class Expense(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='expenses')
     description = models.CharField(max_length=60)
@@ -129,3 +145,7 @@ class Expense(models.Model):
     class Meta:
         verbose_name = 'Расход'
         verbose_name_plural = 'Расходы'
+
+    # def payment_left(self):
+    #     expense_list = Expense.objects.filter(project=self)
+    #     return self.cost - self.prepayment
