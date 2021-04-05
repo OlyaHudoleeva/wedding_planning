@@ -9,6 +9,7 @@ urlpatterns = [
     path('logout', views.logout_user, name='logout'),
 
     path('create_project', views.ProjectCreateView.as_view(), name='create_project'),
+    path('project_list', views.project_list, name='project_list'),
 
     path('', views.index, name='home'),
 

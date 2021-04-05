@@ -17,8 +17,8 @@ class Project(models.Model):
     name = models.CharField(max_length=50)
     bride_name = models.CharField(max_length=20)
     groom_name = models.CharField(max_length=20)
-    wedding_date = models.DateField(blank=True, null=True)
-    ceremony_place = models.CharField(max_length=200, blank=True, null=True)
+    wedding_date = models.DateField(blank=True)
+    ceremony_place = models.CharField(max_length=200, blank=True)
     budget = models.IntegerField()
     slug = models.SlugField(unique=True, blank=True)
 

@@ -1,0 +1,42 @@
+{% extends 'main/navbar.html' %}
+{% load static %}
+
+{% block styles %}{% static 'main/css/project_list.css' %}{% endblock %}
+
+{% block title %}Online Wedding Planner | Проекты{% endblock %}
+
+{% block content %}
+    {% include 'main/navbar.html' %}
+    <div class="col-md-12 d-md-flex justify-content-md-end mb-3" style="margin-top: 100px;">
+        <a href="{% url 'create_project' %}" type="button" class="btn btn-light btn-lg"><i
+                class="fas fa-plus-circle"></i> Добавить проект
+        </a>
+    </div>
+
+    <hr>
+    <div class="row row-cols-md-4 justify-content-center">
+        {% for project in project_list %}
+            <div class="col m-3">
+                <div class="card border-info mb-3" style="max-width: 20rem;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ project.groom_name }} & {{ project.bride_name }}</h5>
+                        <p class="card-text text-center">{{ project.wedding_date }}</p>
+                        <a href="{% url 'overview' project.slug %}" class="btn btn-info">Открыть</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col m-3">
+                <div class="card border-info mb-3" style="max-width: 20rem;">
+                    {#                    <div class="card-header text-center"></div>#}
+                    <div class="card-body text-center">
+                        <h5 class="card-title">У вас пока нет проектов</h5>
+                        <a href="{% url 'create_project' %}" class="btn btn-info"><i class="fas fa-plus-circle"></i>
+                            Добавить</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

@@ -54,7 +54,11 @@ def logout_user(request):
 
 
 def index(request):
-    return render(request, 'main/index.html')
+    # project = get_object_or_404(Project, user=request.user)
+
+
+    context = {}
+    return render(request, 'main/index.html', context)
 
 
 class ProjectCreateView(CreateView):
@@ -70,6 +74,12 @@ class ProjectCreateView(CreateView):
 
     def get_success_url(self):
         return slugify(self.request.POST['name'])
+
+def project_list(request):
+    project_list = Project.objects.filter(user=request.user)
+    context = {'project_list' : project_list}
+
+    return render(request, 'main/project_list.html', context)
 
 
 @login_required(login_url='login')
@@ -95,6 +105,7 @@ def guests(request, project_slug):
 @login_required(login_url='login')
 def overview(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug, user=request.user)
+
     context = {'project': project}
     return render(request, 'main/overview.html', context)
 

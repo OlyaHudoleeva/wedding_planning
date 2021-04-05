@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% block styles %}{% endblock %}">
     <link rel="stylesheet" href="{% static 'main/css/navbar.css' %}">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
@@ -40,7 +40,7 @@
                     </li>
                 </ul>
             </div>
-            <span class="navbar-text"> Привет, {{ request.user }} </span>
+            <span class="navbar-text"><i class="fas fa-user-circle"></i> {{ request.user }} </span>
             <a href="{% url 'logout' %}"> Выйти</a>
         </div>
     </nav>
