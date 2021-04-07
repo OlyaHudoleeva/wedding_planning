@@ -59,7 +59,12 @@ body {
     width: 90px;
 }
 
-.bride-card-img, .groom-card-img {
+.bride-img img, .groom-img img {
+    height: 100px;
+    width: 100px;
+}
+
+.bride-card-img, .groom-card-img, .bride-img, .groom-img {
     justify-content: center;
     display: flex;
     margin-bottom: 1rem;
@@ -120,7 +125,7 @@ input[type=checkbox]:checked + label.strikethrough{
   text-decoration: line-through;
 }
 
-.guests-column-header {
+.guests-column-header, .bride-name, .groom-name {
     align-items: center;
 }
 

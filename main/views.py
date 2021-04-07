@@ -1,7 +1,10 @@
+from django.utils.encoding import escape_uri_path
+
+import xlwt
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView
 
@@ -56,7 +59,6 @@ def logout_user(request):
 def index(request):
     # project = get_object_or_404(Project, user=request.user)
 
-
     context = {}
     return render(request, 'main/index.html', context)
 
@@ -75,9 +77,10 @@ class ProjectCreateView(CreateView):
     def get_success_url(self):
         return slugify(self.request.POST['name'])
 
+
 def project_list(request):
     project_list = Project.objects.filter(user=request.user)
-    context = {'project_list' : project_list}
+    context = {'project_list': project_list}
 
     return render(request, 'main/project_list.html', context)
 
@@ -100,6 +103,36 @@ def guests(request, project_slug):
                   {'project': project, 'bride_side_guests': bride_side_guests, 'groom_side_guests': groom_side_guests,
                    'bride_side_amount': bride_side_amount, 'groom_side_amount': groom_side_amount,
                    'total_male': total_male, 'total_female': total_female, 'total_child': total_child})
+
+
+def export_excel(request, project_slug):
+    project = get_object_or_404(Project, slug=project_slug, user=request.user)
+
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename=' + escape_uri_path('Список гостей')+ '.xls'
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Список гостей')
+    row_num = 0
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['RSVP', 'Имя', 'Фамилия', 'Сторона']
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    font_style = xlwt.XFStyle()
+
+    rows = project.guests.all().values_list('rsvp', 'first_name', 'last_name', 'side')
+
+    for row in rows:
+        row_num += 1
+
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, str(row[col_num]), font_style)
+    wb.save(response)
+
+    return response
 
 
 @login_required(login_url='login')

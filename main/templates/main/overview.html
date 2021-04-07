@@ -3,6 +3,41 @@
 
 {% block title %}Online Wedding Planner | Обзор{% endblock %}
 
+{% block page-name %}Обзор свадебного проекта{% endblock %}
+{% block page-description %}Следите за тем, как идёт подготовка к вашей свадьбе.{% endblock %}
+
 {% block content %}
+
+    <div class="row text-black">
+        <div class="col-lg-6 bride-side">
+            <div class="bride-img">
+                <img src="{% static 'main/img/crown-icon-png-29.jpg' %}" alt="Bride's shoe">
+            </div>
+
+            <div class="col-md-12 mb-5 text-center">
+                <h5 class="bride-name">Невеста {{ project.bride_name }}</h5>
+            </div>
+            <div class="m-3 mx-auto w-75 text-center">
+                <p>Дата свадьбы: {{ project.wedding_date }}</p>
+            </div>
+        </div>
+        <div class="col-lg-6 groom-side-guests">
+            <div class="groom-img">
+                <img src="{% static 'main/img/mustache-icon-png-29.jpg' %}" alt="Groom's shoe">
+            </div>
+
+            <div class="col-md-12 mb-5 text-center">
+                <h5 class="groom-name">Жених {{ project.groom_name }}</h5>
+            </div>
+            <div class="m-3 mx-auto w-75 text-center">
+                <p>Место: {{ project.ceremony_place }}</p>
+            </div>
+        </div>
+        <div class="col-md-12 text-center total-by-side mt-5">
+            <p>Количество приглашённых гостей:</p>
+            <h1>{{ project.guests.count }}</h1>
+        </div>
+    </div>
+
 
 {% endblock %}
