@@ -6,9 +6,14 @@
 {% block page-name %}Список приглашённых гостей{% endblock %}
 {% block page-description %}Подготовьте список гостей со стороны невесты и жениха. Отмечайте тех, кто точно
     придет на свадьбу. Узнайте соотношение гостей с каждой из сторон. Также Вы можете
-    экспортировать список гостей в CSV или XLS файл.{% endblock %}
+    экспортировать список гостей в XLS файл.{% endblock %}
 
 {% block content %}
+
+    <div class="col-md-12 text-center d-md-flex justify-content-md-center mb-3">
+        <a href="{% url 'export_excel' project.slug %}" type="button" class="btn btn-light btn-lg">
+            <i class="fas fa-file-download"></i> Экспорт в Excel</a>
+    </div>
 
     <div class="row text-black">
         <div class="col-lg-6 bride-side-guests">
@@ -93,20 +98,59 @@
                 {#            end dropdown group#}
             {% endfor %}
         </div>
-
     </div>
-
-    <div class="text-center total-by-side mt-5">
+    <hr>
+    <div class="text-center total-by-side mt-5 mb-5">
         <p>Соотношение по сторонам</p>
         <h1>{{ bride_side_amount }} / {{ groom_side_amount }}</h1>
     </div>
-    <div class="total-by-sex">
-        <p>Мужчины : {{ total_male }}</p>
-        <p>Женщины: {{ total_female }}</p>
-        <p>Дети: {{ total_child }}</p>
+    <div class="row d-flex total-by-sex text-center mb-5">
+        <h5 class="col-md-4 text-center"><i class="fas fa-male"></i> Мужчины: {{ total_male }}</h5>
+        <h5 class="col-md-4 text-center"><i class="fas fa-female"></i> Женщины: {{ total_female }}</h5>
+        <h5 class="col-md-4 text-center"><i class="fas fa-baby"></i> Дети: {{ total_child }}</h5>
     </div>
 
-    <a href="{% url 'export_excel' project.slug %}" type="button" class="btn btn-light btn-lg">
-        <i class="fas fa-file-download"></i> Экспорт в Excel
-    </a>
+    <hr>
+
+        <form action="" method="POST">
+        {% csrf_token %}
+        <div class="col-md-12 d-inline-block text-center justify-content-md-center mb-3 mt-5">
+            <label for="first_name">Имя гостя: </label>
+            <input class="mb-3" name="first_name" id="first_name">
+            <label for="last_name">Фамилия гостя: </label>
+            <input class="mb-3" name="last_name" id="last_name">
+            <div class="col-md-12 d-flex justify-content-md-center">
+                <div class="form-check mr-3">
+                    <input class="form-check-input" type="radio" name="sex" id="male" value="M" checked>
+                    <label class="form-check-label" for="male"> Мужчина </label>
+                </div>
+                <div class="form-check mr-3">
+                    <input class="form-check-input" type="radio" name="sex" id="female" value="F">
+                    <label class="form-check-label" for="female"> Женщина </label>
+                </div>
+                <div class="form-check mr-3">
+                    <input class="form-check-input" type="radio" name="sex" id="child" value="C">
+                    <label class="form-check-label" for="child"> Ребёнок </label>
+                </div>
+            </div>
+            <div class="col-md-12 d-flex justify-content-md-center">
+                <div class="form-check mr-3">
+                    <input class="form-check-input" type="radio" name="side" id="groom-side" value="G" checked>
+                    <label class="form-check-label" for="groom-side">
+                        Сторона жениха
+                    </label>
+                </div>
+                <div class="form-check mr-3">
+                    <input class="form-check-input" type="radio" name="side" id="bride-side" value="B">
+                    <label class="form-check-label" for="bride-side">
+                        Сторона невесты
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 d-flex justify-content-md-center">
+        <button type="submit" class="btn btn-light btn-sm"><i class="fas fa-plus-circle"></i> Добавить гостя</button>
+            </div>
+    </form>
+
 {% endblock %}

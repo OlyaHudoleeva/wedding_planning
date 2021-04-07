@@ -88,13 +88,13 @@
                             </div>
                             <form action="" method="POST">
                                 {% csrf_token %}
-                                <div class="modal-body text-center">
-                                    <label for="description">Описание</label>
-                                    <input name="description" placeholder="Описание" id="description">
-                                    <label for="cost">Цена</label>
-                                    <input name="cost" id="cost">
-                                    <label for="prepayment">Предоплата</label>
-                                    <input name="prepayment" id="prepayment">
+                                <div class="col-md-11 ml-4 modal-body text-center d-md-block">
+{#                                    <label for="description">Описание: </label>#}
+                                    <input class="mb-3" name="description" placeholder="Описание" id="description">
+{#                                    <label for="cost">Цена: </label>#}
+                                    <input class="mb-3" name="cost" placeholder="Цена" id="cost">
+{#                                    <label for="prepayment">Предоплата: </label>#}
+                                    <input name="prepayment" placeholder="Предоплата" id="prepayment">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть

@@ -99,6 +99,23 @@ def guests(request, project_slug):
     total_female = project.guests.filter(sex="F").count()
     total_child = project.guests.filter(sex="C").count()
 
+    if request.method == 'POST':
+        form = GuestForm(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            sex = form.cleaned_data['sex']
+            side = form.cleaned_data['side']
+
+            Guest.objects.create(
+                project=project,
+                first_name=first_name,
+                last_name=last_name,
+                sex=sex,
+                side=side
+            ).save()
+            return HttpResponseRedirect('guests', project_slug)
+
     return render(request, 'main/guests.html',
                   {'project': project, 'bride_side_guests': bride_side_guests, 'groom_side_guests': groom_side_guests,
                    'bride_side_amount': bride_side_amount, 'groom_side_amount': groom_side_amount,

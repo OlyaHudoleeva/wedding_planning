@@ -56,3 +56,23 @@ class ExpenseForm(forms.Form):
     description = forms.CharField()
     cost = forms.DecimalField(decimal_places=2)
     prepayment = forms.DecimalField(decimal_places=2)
+
+
+SEX_CHOISES = ((
+        ('M', 'Мужчина'),
+        ('F', 'Женщина'),
+        ('C', 'Ребёнок'),
+    ))
+
+SIDE_CHOISES = ((
+        ('G', 'Сторона жениха'),
+        ('B', 'Сторона невесты'),
+    ))
+
+class GuestForm(forms.Form):
+    first_name = forms.CharField(label="Имя гостя", max_length=20)
+    last_name = forms.CharField(label="Фамилия гостя", max_length=20)
+    sex = forms.ChoiceField(choices=SEX_CHOISES, widget=forms.RadioSelect)
+    side = forms.ChoiceField(choices=SIDE_CHOISES, widget=forms.RadioSelect)
+
+
