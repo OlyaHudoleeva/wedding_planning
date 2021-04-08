@@ -3,6 +3,10 @@
 
 {% block title %}Online Wedding Planner | Обзор{% endblock %}
 
+{% block styles %}
+    <script src="{% static 'main/js/overview.js' %}"></script>
+{% endblock %}
+
 {% block page-name %}Обзор свадебного проекта{% endblock %}
 {% block page-description %}Следите за тем, как идёт подготовка к вашей свадьбе.{% endblock %}
 
@@ -37,17 +41,23 @@
             <hr>
             <h5>Количество приглашённых гостей:</h5>
             <h1>{{ project.guests.count }}</h1>
-                    <hr>
+            <hr>
         </div>
 
     </div>
     <div>
-        <p><i class="far fa-check-square"></i> Выполнено задач: {{ completed_tasks_amount }} / {{ total_tasks_amount }}</p>
+        <p><i class="far fa-check-square"></i> Выполнено задач: {{ completed_tasks_amount }} / {{ total_tasks_amount }}
+        </p>
         <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: {{ completed_tasks_amount }}%;"
-                 aria-valuenow="{{ completed_tasks_amount }}" aria-valuemin="0" aria-valuemax="{{ total_tasks_amount }}">{{ completed_tasks_amount }}</div>
+            <div id="progress-bar" class="progress-bar progress-bar-striped bg-warning" role="progressbar"
+                    {#                 style="width: "calculateCompletedPercentage({{ completed_tasks_amount }}, {{  total_tasks_amount }})""#}
+                 aria-valuenow="{{ completed_tasks_amount }}" aria-valuemin="0"
+                 aria-valuemax="{{ total_tasks_amount }}">{{ completed_tasks_amount }}</div>
         </div>
     </div>
+    <script>
+        calculateCompletedPercentage({{ completed_tasks_amount }}, {{ total_tasks_amount }});
+    </script>
 
 
 {% endblock %}

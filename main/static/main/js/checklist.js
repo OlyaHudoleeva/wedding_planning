@@ -17,9 +17,18 @@ $(document).ready(function () {
     $(".form-check-input").change(function () {
         if (this.checked) {
             $.post(
-                "handle_task",
+                "{{slug}}/handle_task",
                 {
                     'status': 'C',
+                    'id': $(this).data("id")
+                }
+            )
+        }
+        else {
+            $.post(
+                "{{slug}}/handle_task",
+                {
+                    'status': 'P',
                     'id': $(this).data("id")
                 }
             )

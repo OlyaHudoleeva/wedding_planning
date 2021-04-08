@@ -21,7 +21,7 @@ urlpatterns = [
 
     path('<slug:project_slug>/checklist', views.checklist, name='checklist'),
     path('<slug:project_slug>/add_new_subtask', views.add_new_subtask, name='add_new_subtask'),
-    path('handle_task', views.handle_task),
+    path('<slug:project_slug>/handle_task', views.handle_task),
 
     path('<slug:project_slug>/budget', views.budget, name='budget'),
     path('<slug:project_slug>/delete_expense', views.delete_expense, name='delete_expense')

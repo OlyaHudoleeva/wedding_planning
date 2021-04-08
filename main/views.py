@@ -254,7 +254,7 @@ def add_new_subtask(request, project_slug):
 @login_required(login_url='login')
 def handle_task(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug, user=request.user)
-    project_slug = request.POST['project.slug']
+    # project_slug = request.POST['project.slug']
 
     status = request.POST['status']
     id = request.POST['id']
@@ -263,7 +263,10 @@ def handle_task(request, project_slug):
     task.status = status
     task.save()
 
-    return JsonResponse({})
+    context = {'project':project}
+    return render(request, 'main/checklist.html', context)
+    # return JsonResponse({})
+
 
 
 def create_project(request):
