@@ -24,15 +24,15 @@ $(document).ready(function () {
                 }
             )
         }
-        else {
-            $.post(
-                "{{slug}}/handle_task",
-                {
-                    'status': 'P',
-                    'id': $(this).data("id")
-                }
-            )
-        }
+        // else {
+        //     $.post(
+        //         "{{slug}}/handle_task",
+        //         {
+        //             'status': 'P',
+        //             'id': $(this).data("id")
+        //         }
+        //     )
+        // }
         // else
     });
 });

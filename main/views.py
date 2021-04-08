@@ -67,10 +67,16 @@ class ProjectCreateView(CreateView):
     template_name = 'main/create_project.html'
     fields = ('name', 'bride_name', 'groom_name', 'wedding_date', 'ceremony_place', 'budget')
 
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         self.object = form.save(commit=False)
         self.object.save()
+        TaskGroup(project=self.object, name='Найдите место проведения свадьбы').save()
+        TaskGroup(project=self.object, name='Составьте список гостей').save()
+        TaskGroup(project=self.object, name='Найдите подрядчиков').save()
+        TaskGroup(project=self.object, name='Выберите обручальные кольца').save()
+        TaskGroup(project=self.object, name='Выберите свадебный торт').save()
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
@@ -161,14 +167,6 @@ def export_excel(request, project_slug):
 @login_required(login_url='login')
 def overview(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug, user=request.user)
-
-    # completed_tasks = Task.objects.filter(status="C").count()
-    # все в бд выполненные задачи
-
-    # completed_tasks = 0
-
-
-    # таск группы проекта
 
     all_tasks_num = Task.objects.all().count() # все в бд задачи
 
