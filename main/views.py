@@ -1,51 +1,51 @@
 import xlwt
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.encoding import escape_uri_path
 from django.views.generic import CreateView
+from django.contrib.auth.decorators import login_required
 
+from .decorators import unauthenticated_user
 from .forms import *
 from .models import *
 
 
+@unauthenticated_user
 def register_page(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-    else:
-        register_form = CreateUserForm()
-        if request.method == 'POST':
-            register_form = CreateUserForm(request.POST)
-            if register_form.is_valid():
-                # user = register_form.save() #возможно выплюнет нового юзера, нужно проверить
-                register_form.save()
-                user = register_form.cleaned_data.get('username')
-                messages.success(request, 'Аккаунт успешно создан для пользователя ' + user)
 
-                return redirect('login')
-            # TaskGroup(user=register).save()
+    register_form = CreateUserForm()
+    if request.method == 'POST':
+        register_form = CreateUserForm(request.POST)
+        if register_form.is_valid():
+            # user = register_form.save() #возможно выплюнет нового юзера, нужно проверить
+            register_form.save()
+            user = register_form.cleaned_data.get('username')
+            messages.success(request, 'Аккаунт успешно создан для пользователя ' + user)
+
+            return redirect('login')
+        # TaskGroup(user=register).save()
+
 
     context = {'register_form': register_form}
     return render(request, 'main/registration.html', context)
 
 
+@unauthenticated_user
 def login_page(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-    else:
-        if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-            user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=username, password=password)
 
-            if user is not None:
-                login(request, user)
-                return redirect('home')
-            else:
-                messages.info(request, 'Данные введены некорректно')
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.info(request, 'Данные введены некорректно')
+
     context = {}
     return render(request, 'main/login_page.html', context)
 
@@ -119,6 +119,7 @@ def guests(request, project_slug):
                   {'project': project, 'bride_side_guests': bride_side_guests, 'groom_side_guests': groom_side_guests,
                    'bride_side_amount': bride_side_amount, 'groom_side_amount': groom_side_amount,
                    'total_male': total_male, 'total_female': total_female, 'total_child': total_child})
+
 
 def delete_guest(request, project_slug):
     id = request.POST['id']
