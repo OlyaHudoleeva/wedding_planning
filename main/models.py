@@ -73,6 +73,7 @@ class Task(models.Model):
         ('P', 'В процессе'),
         ('C', 'Выполнена'),
     )
+
     task_group = models.ForeignKey(TaskGroup, on_delete=models.CASCADE)
     description = models.CharField(max_length=1000)
     status = models.CharField(max_length=1, choices=STATUS, default='P')

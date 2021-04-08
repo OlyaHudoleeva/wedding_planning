@@ -93,6 +93,7 @@
                     </div>
                     <form method="POST">
                         {% csrf_token %}
+{#                        <input type="hidden" value="{{ project.id }}" name="project_id">#}
                         <div class="input-group mt-5">
                             {{ task_group_form.name }}
                             <div class="input-group-append">

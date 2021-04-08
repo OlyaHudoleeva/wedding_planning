@@ -16,8 +16,16 @@
                     <p> Полезный инструмент для планирования Вашей идеальной свадьбы, который поможет хранить всю
                         необходимую информацию о планируемом торжестве в одном месте и в удобном формате.</p>
                     <a href="#features" type="button" class="btn btn-outline-light mt-5">Узнать больше</a>
-                    <a href="{% url 'project_list' %}" type="button" class="btn btn-info mt-5">Создать свадебный
+{#                    <a href="{% url 'project_list' %}" type="button" class="btn btn-info mt-5">Создать свадебный#}
+{#                        проект</a>#}
+                    {% if not request.user.is_authenticated %}
+                        <a href="{% url 'login' %}" type="button" class="btn btn-info mt-5">Создать свадебный
                         проект</a>
+                    {% else %}
+                        <a href="{% url 'project_list' %}" type="button" class="btn btn-info mt-5">Создать свадебный
+                        проект</a>
+                    {% endif %}
+
                 </div>
             </div>
         </div>
@@ -34,13 +42,12 @@
                         <img src="{% static 'main/img/Checklist.png' %}" class="card-img" alt="...">
                         <h5>Список дел</h5>
                         <p>Следите за всеми задачами, необходимыми для организации идеального свадебного дня.</p>
-                        <a href="{% url 'project_list' %}">Свадебный список дел &#8594</a>
-
-                        {#                        {% if project.exists == False %}#}
-                        {#                            <a href="{% url 'create_project' %}">Свадебный список дел &#8594</a>#}
-                        {#                        {% else %}#}
-                        {#                            <a href="{% url 'checklist' project.slug %}">Свадебный список дел &#8594</a>#}
-                        {#                        {% endif %}#}
+                        {#                        <a href="{% url 'project_list' %}">Свадебный список дел &#8594</a>#}
+                        {% if not request.user.is_authenticated %}
+                            <a href="{% url 'login' %}">Свадебный список дел &#8594</a>
+                        {% else %}
+                            <a href="{% url 'project_list' %}">Свадебный список дел &#8594</a>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -50,8 +57,12 @@
                         <h5>Список гостей</h5>
                         <p>Подготовьте список гостей со стороны невесты и жениха. Отмечайте тех, кто точно придет на
                             свадьбу.</p>
-                        <a href="{% url 'project_list' %}">Список гостей на свадьбу &#8594</a>
-                        {#                        {% url 'guests' project.slug %}#}
+                        {#                        <a href="{% url 'project_list' %}">Список гостей на свадьбу &#8594</a>#}
+                        {% if not request.user.is_authenticated %}
+                            <a href="{% url 'login' %}">Список гостей на свадьбу &#8594</a>
+                        {% else %}
+                            <a href="{% url 'project_list' %}">Список гостей на свадьбу &#8594</a>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -61,8 +72,16 @@
                         <h5>Бюджет</h5>
                         <p>Будьте в курсе ваших расходов - следите за своим бюджетом и любыми непогашенными
                             платежами.</p>
-                        <a href="{% url 'project_list' %}">Свадебный бюджет &#8594</a>
+
+                        {#                        <a href="{% url 'project_list' %}">Свадебный бюджет &#8594</a>#}
                         {#                        {% url 'budget' project.slug %}#}
+                        {% if not request.user.is_authenticated %}
+                            <a href="{% url 'login' %}">Свадебный бюджет &#8594</a>
+
+                        {% else %}
+                            <a href="{% url 'project_list' %}">Свадебный бюджет &#8594</a>
+
+                        {% endif %}
                     </div>
                 </div>
 

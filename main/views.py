@@ -162,7 +162,29 @@ def export_excel(request, project_slug):
 def overview(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug, user=request.user)
 
-    context = {'project': project}
+    # completed_tasks = Task.objects.filter(status="C").count()
+    # все в бд выполненные задачи
+
+    # completed_tasks = 0
+
+
+    # таск группы проекта
+
+    all_tasks_num = Task.objects.all().count() # все в бд задачи
+
+    task_groups = project.task_group.all() #все таск группы проекта
+    tasks = Task.objects.all()
+
+    total_tasks_amount = 0
+    completed_tasks_amount = 0
+
+    for group in task_groups:
+        group.tasks = list(filter(lambda task: task.task_group == group, tasks))
+        total_tasks_amount += len(group.tasks)
+        completed_tasks_amount += len(list(filter(lambda task: task.status == "C", group.tasks)))
+
+
+    context = {'project': project, 'completed_tasks_amount': completed_tasks_amount, 'total_tasks_amount': total_tasks_amount}
     return render(request, 'main/overview.html', context)
 
 
@@ -176,7 +198,7 @@ def checklist(request, project_slug):
     if request.method == "POST":
         task_group_form = TaskGroupForm(request.POST)
         # task_group_form.instance.user = User.objects.get(id=1)
-        task_group_form.instance.project = Project.objects.get(id=1)
+        task_group_form.instance.project = Project.objects.get(id=project.id)
 
         if task_group_form.is_valid():
             task_group_form.save()
@@ -189,6 +211,7 @@ def checklist(request, project_slug):
         task_group_list = project.task_group.all()
     else:
         task_group_list = []
+
     tasks = Task.objects.all()
 
     for group in task_group_list:
