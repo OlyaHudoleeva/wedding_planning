@@ -51,8 +51,14 @@
                         <li><a class="dropdown-item"><i class="fas fa-female"></i></a></li>
                         <li><a class="dropdown-item"><i class="fas fa-baby"></i></a></li>
                     </ul>
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
-                            class="far fa-trash-alt"></i></button>
+                    <form action="delete_guest" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value={{ bride_side_guest.id }}>
+                        <button class="btn btn-outline-secondary delete-guest-btn" type="submit"
+                                id="delete-guest-{{ bride_side_guest.id }}"><i
+                                class="far fa-trash-alt"></i></button>
+                    </form>
+
                 </div>
 
                 {#            end dropdown group#}
@@ -91,8 +97,13 @@
                         <li><a class="dropdown-item"><i class="fas fa-female"></i></a></li>
                         <li><a class="dropdown-item"><i class="fas fa-baby"></i></a></li>
                     </ul>
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
-                            class="far fa-trash-alt"></i></button>
+                    <form action="delete_guest" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value={{ groom_side_guest.id }}>
+                        <button class="btn btn-outline-secondary delete-guest-btn" type="submit"
+                                id="delete-guest-{{ groom_side_guest.id }}"><i
+                                class="far fa-trash-alt"></i></button>
+                    </form>
                 </div>
 
                 {#            end dropdown group#}
@@ -112,7 +123,7 @@
 
     <hr>
 
-        <form action="" method="POST">
+    <form action="" method="POST">
         {% csrf_token %}
         <div class="col-md-12 d-inline-block text-center justify-content-md-center mb-3 mt-5">
             <label for="first_name">Имя гостя: </label>
@@ -149,8 +160,9 @@
             </div>
         </div>
         <div class="col-md-12 d-flex justify-content-md-center">
-        <button type="submit" class="btn btn-light btn-sm"><i class="fas fa-plus-circle"></i> Добавить гостя</button>
-            </div>
+            <button type="submit" class="btn btn-light btn-sm"><i class="fas fa-plus-circle"></i> Добавить гостя
+            </button>
+        </div>
     </form>
 
 {% endblock %}

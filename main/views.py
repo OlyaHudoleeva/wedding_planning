@@ -1,11 +1,10 @@
-from django.utils.encoding import escape_uri_path
-
 import xlwt
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.encoding import escape_uri_path
 from django.views.generic import CreateView
 
 from .forms import *
@@ -121,12 +120,18 @@ def guests(request, project_slug):
                    'bride_side_amount': bride_side_amount, 'groom_side_amount': groom_side_amount,
                    'total_male': total_male, 'total_female': total_female, 'total_child': total_child})
 
+def delete_guest(request, project_slug):
+    id = request.POST['id']
+    Guest(id=id).delete()
+
+    return redirect('guests', project_slug)
+
 
 def export_excel(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug, user=request.user)
 
     response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename=' + escape_uri_path('Список гостей')+ '.xls'
+    response['Content-Disposition'] = 'attachment; filename=' + escape_uri_path('Список гостей') + '.xls'
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet('Список гостей')
     row_num = 0

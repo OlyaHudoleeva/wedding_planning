@@ -16,6 +16,7 @@ urlpatterns = [
     path('<slug:project_slug>', views.overview, name='overview'),
 
     path('<slug:project_slug>/guests', views.guests, name='guests'),
+    path('<slug:project_slug>/delete_guest', views.delete_guest, name='delete_guest'),
     path('<slug:project_slug>/export_excel', views.export_excel, name='export_excel'),
 
     path('<slug:project_slug>/checklist', views.checklist, name='checklist'),
